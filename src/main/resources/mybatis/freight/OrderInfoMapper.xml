@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.freight.dao.OrderInfoDao">
+
+	<select id="get" resultType="com.bootdo.freight.domain.OrderInfoDO">
+		select `id`,`customer_id`,`cargo_id`,`waybill_id`,`order_type`,`weight`,`create_time`,`update_time` from t_order_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.freight.domain.OrderInfoDO">
+		select `id`,`customer_id`,`cargo_id`,`waybill_id`,`order_type`,`weight`,`create_time`,`update_time` from t_order_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="customerId != null and customerId != ''"> and customer_id = #{customerId} </if>
+		  		  <if test="cargoId != null and cargoId != ''"> and cargo_id = #{cargoId} </if>
+		  		  <if test="waybillId != null and waybillId != ''"> and waybill_id = #{waybillId} </if>
+		  		  <if test="orderType != null and orderType != ''"> and order_type = #{orderType} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from t_order_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="customerId != null and customerId != ''"> and customer_id = #{customerId} </if>
+		  		  <if test="cargoId != null and cargoId != ''"> and cargo_id = #{cargoId} </if>
+		  		  <if test="waybillId != null and waybillId != ''"> and waybill_id = #{waybillId} </if>
+		  		  <if test="orderType != null and orderType != ''"> and order_type = #{orderType} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.freight.domain.OrderInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into t_order_info
+		(
+			`customer_id`, 
+			`cargo_id`, 
+			`waybill_id`, 
+			`order_type`, 
+			`weight`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{customerId}, 
+			#{cargoId}, 
+			#{waybillId}, 
+			#{orderType}, 
+			#{weight}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.freight.domain.OrderInfoDO">
+		update t_order_info 
+		<set>
+			<if test="customerId != null">`customer_id` = #{customerId}, </if>
+			<if test="cargoId != null">`cargo_id` = #{cargoId}, </if>
+			<if test="waybillId != null">`waybill_id` = #{waybillId}, </if>
+			<if test="orderType != null">`order_type` = #{orderType}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from t_order_info where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from t_order_info where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

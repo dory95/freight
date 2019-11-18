@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${customerInfo.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">客户名称，比如公司名：</label>
+								<div class="col-sm-8">
+									<input id="name" name="name" th:value="${customerInfo.name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">包车价格(客户)：</label>
+								<div class="col-sm-8">
+									<input id="customerBaochePrice" name="customerBaochePrice" th:value="${customerInfo.customerBaochePrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">包车价格(车主)：</label>
+								<div class="col-sm-8">
+									<input id="driverBaochePrice" name="driverBaochePrice" th:value="${customerInfo.driverBaochePrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">联系电话：</label>
+								<div class="col-sm-8">
+									<input id="mobile" name="mobile" th:value="${customerInfo.mobile}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">联系地址：</label>
+								<div class="col-sm-8">
+									<input id="address" name="address" th:value="${customerInfo.address}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${customerInfo.remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${customerInfo.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新时间：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" th:value="${customerInfo.updateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/freight/customerInfo/edit.js">
+	</script>
+</body>
+</html>
